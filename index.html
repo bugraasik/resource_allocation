@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Resource Allocator (DP 0/1 Knapsack)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>☁️ Cloud Resource Allocator</h1>
+        <p class="subtitle">Bellman's Dynamic Programming Approach vs Greedy</p>
+
+        <div class="input-section">
+            <div class="input-group">
+                <label for="server-capacity">Sunucu Kapasitesi (RAM/CPU GB):</label>
+                <input type="number" id="server-capacity" value="5" min="1">
+            </div>
+            <button id="btn-run" onclick="startAllocation()">Algoritmayı Çalıştır</button>
+        </div>
+
+        <div class="controls-section" style="margin-bottom: 20px; display: flex; gap: 10px; justify-content: center;">
+            <button id="btn-prev" onclick="prevStep()" disabled>⏮️ Geri</button>
+            <button id="btn-next" onclick="nextStep()" disabled>İleri ⏭️</button>
+            <span id="step-counter" style="align-self: center; font-weight: bold;">Adım: 0 / 0</span>
+        </div>
+
+        <div class="info-section" style="background: #181825; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <h3>ℹ️ Algoritma Durumu</h3>
+            <p id="algorithm-status">Lütfen "Algoritmayı Başlat" butonuna basın.</p>
+            <div id="selected-vms-output" style="font-weight: bold; color: #a6e3a1;"></div>
+        </div>
+
+        <div class="result-section">
+            <h2>📊 DP Matrisi (Görsel Takip)</h2>
+            <div id="table-container">
+                <p style="color: #888;">Lütfen algoritmayı çalıştırın...</p>
+            </div>
+        </div>
+
+        <div class="comparison-section" style="margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            
+            <div class="card" style="background: #1e1e2e; padding: 20px; border-radius: 8px; border: 2px solid #89b4fa;">
+                <h3 style="color: #89b4fa; margin-top: 0;">🧠 Bellman (Dynamic Programming)</h3>
+                <p><strong>Toplam Elde Edilen Değer:</strong> <span id="dp-total-value" style="color: #a6e3a1; font-size: 20px;">0</span></p>
+                <p><strong>Kullanılan RAM/CPU:</strong> <span id="dp-used-weight">0 GB</span></p>
+                <p><strong>Seçilen VM'ler:</strong> <span id="dp-selected-list" style="font-style: italic; color: #a6adc8;">-</span></p>
+                <small style="color: #6c7086;">*Garantili en optimal çözümü bulur.</small>
+            </div>
+
+            <div class="card" style="background: #1e1e2e; padding: 20px; border-radius: 8px; border: 2px solid #f38ba8;">
+                <h3 style="color: #f38ba8; margin-top: 0;">⚡ Greedy (Açgözlü Yaklaşım)</h3>
+                <p><strong>Toplam Elde Edilen Değer:</strong> <span id="greedy-total-value" style="color: #f38ba8; font-size: 20px;">0</span></p>
+                <p><strong>Kullanılan RAM/CPU:</strong> <span id="greedy-used-weight">0 GB</span></p>
+                <p><strong>Seçilen VM'ler:</strong> <span id="greedy-selected-list" style="font-style: italic; color: #a6adc8;">-</span></p>
+                <small style="color: #6c7086;">*Hızlıdır ama global optimumu gözden kaçırabilir.</small>
+            </div>
+        </div>
+
+        <div id="analysis-report" style="margin-top: 20px; background: #313244; padding: 15px; border-radius: 8px; display: none;">
+            <h4 style="margin-top:0; color:#f9e2af;">📉 Mühendislik Analiz Raporu</h4>
+            <p id="analysis-text" style="line-height: 1.5; color: #cdd6f4;"></p>
+        </div>
+
+    </div> <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+:root {
+    --bg-color: #1e1e2e;
+    --card-bg: #252538;
+    --text-color: #cdd6f4;
+    --accent-color: #89b4fa;
+    --grid-border: #45475a;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+h1 { color: var(--accent-color); margin-bottom: 5px; }
+.subtitle { color: #a6adc8; margin-top: 0; font-style: italic; }
+
+.input-section {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    background: #181825;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.input-group { display: flex; flex-direction: column; gap: 8px; }
+
+input {
+    background: #313244;
+    border: 1px solid var(--grid-border);
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+button {
+    background: var(--accent-color);
+    color: #11111b;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover { opacity: 0.9; }
+
+/* DP Tablo Tasarımı */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-family: monospace;
+}
+
+th, td {
+    border: 1px solid var(--grid-border);
+    padding: 12px;
+    text-align: center;
+}
+
+th { background-color: #11111b; color: var(--accent-color); }
+td { background-color: #181825; }
+/* Animasyon Renkleri */
+.current-cell {
+    background-color: #f9e2af !important; /* Sarı - Şu an hesaplanan */
+    color: #11111b !important;
+    font-weight: bold;
+    transform: scale(1.05);
+    transition: all 0.2s ease;
+}
+
+.previous-cell {
+    background-color: #89b4fa !important; /* Mavi - Bakılan üst hücre */
+    color: #11111b !important;
+}
+
+.diagonal-cell {
+    background-color: #cba6f7 !important; /* Mor - Ağırlık düşünce bakılan hücre */
+    color: #11111b !important;
+}
+
+.final-selected {
+    background-color: #a6e3a1 !important; /* Yeşil - En son seçilen VM hücresi */
+    color: #11111b !important;
+}
