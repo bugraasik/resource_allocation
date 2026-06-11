@@ -31,23 +31,24 @@ The application features a dark-themed, responsive user interface engineered for
 * **🟣 Purple Highlight:** Traces the branch where resources are allocated ($DP[i-1][w - \text{weight}[i]]$).
 * **🟢 Green Highlight:** Illuminates the final solution path during **Solution Reconstruction (Backtracking)**.
 
----
+### 🏗️ System Architecture & Data Flow (Sistem Mimarisi)
 
-## 📉 4. Comparative Analysis: Dynamic Programming vs. Greedy Heuristics
+The chart below illustrates the system's component architecture and how the visual state snapshot flow is managed between the core JavaScript allocation engine and the DOM rendering layers:
 
-A core requirement of this engineering study is proving the vulnerability of Greedy algorithms under strict boundary conditions. 
-
-### Why Greedy Fails:
-Greedy heuristics sort entities by their value-to-weight efficiency ratio ($\frac{\text{Value}}{\text{Weight}}$). While faster ($\mathcal{O}(n \log n)$), it fails to recognize combinational synergies, often leaving unutilized capacity gaps that yield lower global utility scores.
-
-### Concrete Proof Verification Scenario:
-* **Server Constraint Capacity:** 5 GB
-* **Active VM Register:**
-  * **VM1:** Weight = 2, Value = 3 (Ratio = 1.5)
-  * **VM2:** Weight = 3, Value = 4 (Ratio = 1.33)
-  * **VM4:** Weight = 5, Value = 6 (Ratio = 1.2)
-
-* **Greedy Decision Path:** Selects VM4 due to its high independent value. Total Capacity used: 5/5 GB. **Total Global Value = 6**.
-* **Bellman (DP) Decision Path:** Combines sub-problem states to optimize the allocation by selecting VM1 and VM2 together. Total Capacity used: 5/5 GB. **Total Global Value = 3 + 4 = 7**.
-
-**Conclusion:** Graphed and visualized results confirm that the Dynamic Programming implementation successfully attains the true global optimum ($7 > 6$), validating structural superiority over simple heuristics.
+```mermaid
+graph TD
+    A[index.html: User Interface] -->|1. Triggers Input W| B(script.js: startAllocation)
+    B -->|2. Inits Matrix & Snapshots| C{Bellman Engine Loops}
+    C -->|3. Validates Constraints| D[Memoization Array: steps]
+    D -->|4. Playback Controls Forward/Backward| E[renderStep Function]
+    E -->|5. Compares with Heuristic| F(runGreedyAllocation)
+    F -->|6. Updates DOM & Colors| G[table-container & analysis-report]
+    G -->|7. Displays Global Optimum Context| A
+    
+    style A fill:#252538,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
+    style B fill:#181825,stroke:#cba6f7,stroke-width:2px,color:#cdd6f4
+    style C fill:#313244,stroke:#f9e2af,stroke-width:2px,color:#11111b
+    style D fill:#1e1e2e,stroke:#a6e3a1,stroke-width:2px,color:#11111b
+    style E fill:#181825,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
+    style F fill:#181825,stroke:#f38ba8,stroke-width:2px,color:#cdd6f4
+    style G fill:#252538,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
